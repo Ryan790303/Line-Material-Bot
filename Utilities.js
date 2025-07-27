@@ -711,18 +711,20 @@ function formatUserRecords(records) {
 }
 
 function doesMaterialExist(materialData) {
-  const materialsMap = getInventoryMap();
-  const { 品名, 型號, 規格 } = materialData;
+  const materialsMap = getInventoryMap();
+  const { 品名, 型號, 規格 } = materialData;
 
-  // 遍歷所有現存物料
-  for (const existingMaterial of materialsMap.values()) {
-    if (existingMaterial.品名 === 品名 &&
-        existingMaterial.型號 === 型號 &&
-        existingMaterial.規格 === 規格) {
-      return true; // 找到完全相符的項目
-    }
-  }
-  return false; // 沒找到任何相符的項目
+  for (const existingMaterial of materialsMap.values()) {
+    // --- 修改處 START ---
+    // 確保 undefined 和空字串 '' 被視為相同，進行比對
+    if (existingMaterial.品名 === 品名 &&
+        existingMaterial.型號 === (型號 || '') &&
+        existingMaterial.規格 === (規格 || '')) {
+      // --- 修改處 END ---
+      return true;
+    }
+  }
+  return false;
 }
 
 /**
