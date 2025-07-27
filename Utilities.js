@@ -711,7 +711,7 @@ function formatUserRecords(records) {
 }
 
 function doesMaterialExist(materialData) {
-  const materialsMap = getInventoryMap(); // 取得所有現存物料的 Map
+  const materialsMap = getInventoryMap();
   const { 品名, 型號, 規格 } = materialData;
 
   // 遍歷所有現存物料
